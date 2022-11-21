@@ -2,7 +2,7 @@
 
 namespace Shop.Controllers
 {
-    public class SpeiceshipController : Controller
+    public class SpaceshipController : Controller
     {
         public IActionResult Index()
         {
