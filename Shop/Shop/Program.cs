@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using ShopTARgv21.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ShopDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefailtConnection")));
 
 var app = builder.Build();
 
