@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Shop.Models.Spaceship.SpaceshipViewModel>
+
+<div class="h1">
+    Products
+</div>
+
+<div>
+    <a asp-action="add" asp-controller="spaceship" type="submit" class="btn btn-primary">Add</a>
+</div>
+
+<form method="post" class="m-1">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nr</th>
+                <th scope="col">Name</th>
+                <th scope="col">Model Type</th>
+                <th scope="col">Passengers</th>
+                <th scope="col">Build Of Date</th>
+                <th scope="col">Maiden Launch</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td class="">StarShip</td>
+                <td class="">Cargo</td>
+                <td class="">10</td>
+                <td class="">12.04.2021</td>
+                <td class="">13.05.2021</td>
+                <td class="">
+                    <a asp-action="edit" asp-controller="spaceship" asp-route-id="" class="btn btn-primary">Edit</a>
+                    <input asp-action="delite" asp-controller="spaceship" asp-route-id="" type="submit" class="btn btn-danger" value="Delete" />
+                </td>
+            </tr>
+           @* @foreach (var spaceship in Model)
+            {
+              <tr>
+                    <th scope="row">1</th>
+                    <td class="">@spaceship.Name</td>
+                    <td class="">@spaceship.ModelType</td>
+                    <td class="">@spaceship.Passengers</td>
+                    <td class="">@spaceship.BuildOfDate</td>
+                    <td class="">@spaceship.LaunchDate</td>
+                </tr>
+
+            }*@
+        </tbody>
+    </table>
+
+</form>

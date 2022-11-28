@@ -1,4 +1,4 @@
-﻿namespace Shop.Models.Speiceship
+﻿namespace Shop.Models.Spaceship
 {
     public class SpaceshipViewModel
     {
