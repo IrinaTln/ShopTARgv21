@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopTARgv21.Core.Domain
 {
-    internal class Spaceship
+    public class Spaceship
     {
         [Key]
         public Guid? Id { get; set; }
