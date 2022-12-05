@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARgv21.Core", "ShopTAR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARgv21.Data", "ShopTARgv21.Data\ShopTARgv21.Data.csproj", "{6E2BAFA1-A1BD-4986-9AC5-984B8DDFA7CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopTARgv21.ApplicationServices", "ShopTARgv21.ApplicationServices\ShopTARgv21.ApplicationServices.csproj", "{DE1135A0-85E7-4B8F-AE66-06C33E98DE54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6E2BAFA1-A1BD-4986-9AC5-984B8DDFA7CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E2BAFA1-A1BD-4986-9AC5-984B8DDFA7CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E2BAFA1-A1BD-4986-9AC5-984B8DDFA7CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE1135A0-85E7-4B8F-AE66-06C33E98DE54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE1135A0-85E7-4B8F-AE66-06C33E98DE54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE1135A0-85E7-4B8F-AE66-06C33E98DE54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE1135A0-85E7-4B8F-AE66-06C33E98DE54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,87 @@
+﻿@model Shop.Models.Spaceship.SpaceshipEditViewModel
+
+<h1>
+    Add
+</h1>
+
+<div>
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="Id" type="hidden"/>
+        <input asp-for="CreatedAt" type="hidden" />
+        <input asp-for="ModifiedAt" type="hidden" />
+
+        <div class="form-group row">
+            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Name" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="ModelType" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="ModelType" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="SpaceshipBuilder" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="SpaceshipBuilder" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="PlaceOfBuild" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="PlaceOfBuild" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="EnginePower" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="EnginePower" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="LiftUpToSpaceByTonn" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="LiftUpToSpaceByTonn" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Crew" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Crew" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Passengers" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Passengers" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="LaunchDate" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="LaunchDate" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="BuildOfDate" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="BuildOfDate" class="form-control" />
+            </div>
+        </div>
+
+        <input asp-action="add" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Add" />
+        <a asp-action="Index" class="btn btn-primary">Index</a>
+
+    </form>
+</div> 
