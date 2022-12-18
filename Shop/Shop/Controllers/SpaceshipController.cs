@@ -12,11 +12,7 @@ namespace Shop.Controllers
         private readonly ShopDbContext _context;
         private readonly ISpaceShipServices _spaceshipServices;
         
-        public SpaceshipController
-            (
-                ShopDbContext context,
-                ISpaceShipServices spaceshipServices
-            )
+        public SpaceshipController(ShopDbContext context, ISpaceShipServices spaceshipServices)
         {
             _context = context;
            _spaceshipServices = spaceshipServices;
