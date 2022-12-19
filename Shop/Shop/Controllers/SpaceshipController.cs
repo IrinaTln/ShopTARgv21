@@ -65,9 +65,18 @@ namespace Shop.Controllers
                 BuildOfDate = vm.BuildOfDate,
                 CreatedAt = vm.CreatedAt,
                 ModifiedAt = vm.ModifiedAt,
+                Files = vm.Files,
+                Image = vm.Image.Select(x => new FileToDatabaseDto
+
+                {
+                    Id = x.Id,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
+                    SpaceshipId = x.SpaceshipId
+                }).ToArray()
             };
 
-            var result = await _spaceshipServices.Add(dto);
+            var result = await _spaceshipServices.Create(dto);
 
             if (result is null)
             {
