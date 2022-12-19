@@ -6,7 +6,7 @@
 }
 else
 {
-    <h1>Add</h1>
+    <h1>Create</h1>
 }
 
 <div>
@@ -87,11 +87,11 @@ else
 
         @if (Model.Id.HasValue)
         {
-            <input asp-action="edit" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Update" />
+            <input asp-action="update" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Update" />
         }
         else
         {
-            <input asp-action="add" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Add" />
+            <input asp-action="create" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Create" />
         }
         
         <a asp-action="Index" class="btn btn-primary">Index</a>

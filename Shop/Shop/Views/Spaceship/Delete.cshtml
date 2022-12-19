@@ -1,0 +1,62 @@
+﻿@model Shop.Models.Spaceship.SpaceshipViewModel
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<div>
+    <h4>Spaceship</h4>
+    <hr />
+    <dl class="row">
+        <div class="form-group row">
+            <input type="hidden" asp-for="Id" class="col-sm-2 col-form-label" />
+            
+        </div>
+        <div class="form-group row">
+            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Name)
+        </div>
+        <div class="form-group row">
+            <label asp-for="ModelType" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.ModelType)
+        </div>
+        <div class="form-group row">
+            <label asp-for="SpaceshipBuilder" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SpaceshipBuilder)
+        </div>
+        <siv class="form-group row">
+            <label asp-for="PlaceOfBuild" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.PlaceOfBuild)
+        </siv>
+        <div class="form-group row">
+            <label asp-for="EnginePower" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.EnginePower)
+        </div>
+        <div class="form-group row">
+            <label asp-for="LiftUpToSpaceByTonn" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.LiftUpToSpaceByTonn)
+        </div>
+        <div class="form-group row">
+            <label asp-for="Crew" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Crew)
+        </div>
+        <div class="form-group row">
+            <label asp-for="Passengers" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Passengers)
+        </div>
+        <div class="form-group row">
+            <label asp-for="LaunchDate" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.LaunchDate)
+        </div>
+        <div class="form-group row">
+            <label asp-for="BuildOfDate" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.BuildOfDate)
+        </div>
+    </dl>
+
+    <form asp-action="DeleteConfirmation" asp-route-id="@Model.Id">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index">Back To List</a>
+    </form>
+</div>
