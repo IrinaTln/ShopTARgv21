@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Shop.Models.Car.CarListViewModel>
+
+@{
+    int rowNumber = 0;
+}
+
+<div class="h1">
+    Car Register
+</div>
+
+<div>
+    <a asp-action="create" asp-controller="car" type="submit" class="btn btn-primary">Create</a>
+</div>
+
+<form method="post" class="m-1">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nr</th>
+                <th scope="col">Owner name</th>
+                <th scope="col">Number of registration</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Model</th>
+                <th scope="col">Color</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var car in Model)
+            {
+
+                rowNumber += 1;
+                <tr>
+                    <th scope="row">@rowNumber</th>
+                    <td class="">@car.OwnerName</td>
+                    <td class="">@car.NumberOfRegistration</td>
+                    <td class="">@car.Brand</td>
+                    <td class="">@car.Model</td>
+                    <td class="">@car.Color</td>
+                    <td class="">
+                        <a asp-action="update" asp-controller="car" asp-route-id="@car.Id" class="btn btn-primary">Update</a>
+                        <a asp-action="delete" asp-controller="car" asp-route-id="@car.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</form>

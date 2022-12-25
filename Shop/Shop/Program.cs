@@ -12,7 +12,9 @@ builder.Services.AddDbContext<ShopDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ISpaceShipServices, SpaceShipServices>();
-    
+
+builder.Services.AddScoped<ICarServices, CarServices>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -146,6 +146,7 @@ namespace Shop.Controllers
 
             return RedirectToAction(nameof(Index), vm);
         }
+
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
