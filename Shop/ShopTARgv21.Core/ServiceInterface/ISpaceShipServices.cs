@@ -1,5 +1,6 @@
 ﻿using ShopTARgv21.Core.Domain;
 using ShopTARgv21.Core.Dto;
+using System.Threading.Tasks;
 
 
 namespace ShopTARgv21.Core.ServiceInterface
@@ -13,6 +14,8 @@ namespace ShopTARgv21.Core.ServiceInterface
         Task<Spaceship> Update(SpaceshipDto dto);
 
         Task<Spaceship> Delete(Guid id);
+
+        Task<FileToDatabase> RemoveImage(FileToDatabaseDto dto);
     }
    
 }
