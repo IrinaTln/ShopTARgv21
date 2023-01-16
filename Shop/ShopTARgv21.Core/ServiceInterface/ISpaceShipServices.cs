@@ -15,7 +15,6 @@ namespace ShopTARgv21.Core.ServiceInterface
 
         Task<Spaceship> Delete(Guid id);
 
-        Task<FileToDatabase> RemoveImage(FileToDatabaseDto dto);
     }
    
 }

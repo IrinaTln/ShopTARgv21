@@ -4,9 +4,9 @@ using ShopTARgv21.Core.Domain;
 using ShopTARgv21.Core.Dto;
 using ShopTARgv21.Data;
 
-namespace ShopTARgv21.ApplicationServices
+namespace ShopTARgv21.ApplicationServices.Services
 {
-    public class CarServices : ICarServices 
+    public class CarServices : ICarServices
     {
         private readonly ShopDbContext _dbcontext;
         public CarServices

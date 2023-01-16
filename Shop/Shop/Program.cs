@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ShopTARgv21.ApplicationServices;
+using ShopTARgv21.ApplicationServices.Services;
 using ShopTARgv21.Core.ServiceInterface;
 using ShopTARgv21.Data;
 
@@ -14,6 +14,8 @@ builder.Services.AddDbContext<ShopDbContext>(options =>
 builder.Services.AddScoped<ISpaceShipServices, SpaceShipServices>();
 
 builder.Services.AddScoped<ICarServices, CarServices>();
+
+builder.Services.AddScoped<IFileServices, FileServices>();
 
 var app = builder.Build();
 
