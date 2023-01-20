@@ -34,7 +34,7 @@ namespace Shop.Controllers
                     Model = x.Model,
                     Color = x.Color
                 });
-            return View();
+            return View(result);
         }
     }
 }
