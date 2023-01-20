@@ -100,26 +100,13 @@ namespace ShopTARgv21.ApplicationServices.Services
 
         public async Task<Spaceship> Delete(Guid id)
         {
-
-            var photos = await _context.FileToDatabase
-               .Where(x => x.Id == id)
-               .Select(y => new FileToDatabaseDto
-               {
-                   SpaceshipId = id
-                   
-               })
-               .ToArrayAsync();
-
-            var spaceshipId = await _context.Spaceship
+            var spaceship = await _context.Spaceship
               .FirstOrDefaultAsync(x => x.Id == id);
 
-
-            await _files.RemoveImagesFromDatabase(photos);
-
-            _context.Spaceship.Remove(spaceshipId);
+            _context.Spaceship.Remove(spaceship);
             await _context.SaveChangesAsync();
 
-            return spaceshipId;
+            return spaceship;
         }
 
     }
