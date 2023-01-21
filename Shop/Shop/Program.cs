@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ShopTARgv21.ApplicationServices;
+using ShopTARgv21.ApplicationServices.Services;
 using ShopTARgv21.Core.ServiceInterface;
 using ShopTARgv21.Data;
 

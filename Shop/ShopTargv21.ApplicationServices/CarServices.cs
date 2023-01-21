@@ -4,7 +4,7 @@ using ShopTARgv21.Core.Domain;
 using ShopTARgv21.Core.Dto;
 using ShopTARgv21.Data;
 
-namespace ShopTARgv21.ApplicationServices
+namespace ShopTARgv21.ApplicationServices.Services
 {
     public class CarServices : ICarServices
     {
@@ -16,7 +16,7 @@ namespace ShopTARgv21.ApplicationServices
         {
             _dbcontext = dbcontext;
         }
-        public async Task<Car> Add(CarDto dto)
+        public async Task<Car> Create(CarDto dto)
         {
             Car car = new Car();
 
@@ -33,7 +33,7 @@ namespace ShopTARgv21.ApplicationServices
             car.NumberOfPassangersWithDriver = dto.NumberOfPassangersWithDriver;
             car.CarWeight = dto.CarWeight;
             car.BuildOfDate = dto.BuildOfDate;
-            car.DateOfRegistration = dto.DateOfRegistration;    
+            car.DateOfRegistration = dto.DateOfRegistration;
 
             await _dbcontext.Car.AddAsync(car);
             await _dbcontext.SaveChangesAsync();
