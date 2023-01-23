@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using ShopTARgv21.Core.Dto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,7 +23,9 @@ namespace ShopTARgv21.Core.Domain
         public string Passengers { get; set; }
         public DateTime LaunchDate { get; set; }
         public DateTime BuildOfDate { get; set; }
+        public IEnumerable<FileToDatabase> FileToDatabases { get; set; } = new List<FileToDatabase>();
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+
     }
 }

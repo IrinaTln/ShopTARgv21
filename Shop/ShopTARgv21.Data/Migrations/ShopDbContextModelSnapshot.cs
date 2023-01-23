@@ -98,6 +98,8 @@ namespace ShopTARgv21.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SpaceshipId");
+
                     b.ToTable("FileToDatabase");
                 });
 
@@ -151,6 +153,18 @@ namespace ShopTARgv21.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Spaceship");
+                });
+
+            modelBuilder.Entity("ShopTARgv21.Core.Domain.FileToDatabase", b =>
+                {
+                    b.HasOne("ShopTARgv21.Core.Domain.Spaceship", null)
+                        .WithMany("FileToDatabases")
+                        .HasForeignKey("SpaceshipId");
+                });
+
+            modelBuilder.Entity("ShopTARgv21.Core.Domain.Spaceship", b =>
+                {
+                    b.Navigation("FileToDatabases");
                 });
 #pragma warning restore 612, 618
         }

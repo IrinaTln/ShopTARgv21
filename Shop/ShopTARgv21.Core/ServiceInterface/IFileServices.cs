@@ -13,5 +13,7 @@ namespace ShopTARgv21.Core.ServiceInterface
         void UploadFileToDatabase(SpaceshipDto dto, Spaceship domaine);
 
         Task<FileToDatabase> RemoveImage(FileToDatabaseDto dto);
+
+        Task<List<FileToDatabase>> RemoveImagesFromDatabase(FileToDatabaseDto[] dto);
     }
 }
