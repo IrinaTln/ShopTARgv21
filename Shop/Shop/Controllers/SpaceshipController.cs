@@ -87,7 +87,7 @@ namespace Shop.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction(nameof(Index), vm);
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
