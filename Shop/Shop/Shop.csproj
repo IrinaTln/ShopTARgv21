@@ -20,5 +20,9 @@
     <ProjectReference Include="..\ShopTARgv21.Data\ShopTARgv21.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\multipleFileUpload\" />
+  </ItemGroup>
+
 
 </Project>

@@ -1,4 +1,6 @@
-﻿namespace Shop.Models.RealEstate
+﻿using ShopTARgv21.Core.Domain;
+
+namespace Shop.Models.RealEstate
 {
     public class RealEstateCreateUpdateViewModel
     {
@@ -11,6 +13,8 @@
         public int RoomNumber { get; set; }
         public int Price { get; set; }
         public string Contact { get; set; }
+        public List<IFormFile> Files { get; set; }
+        public List<FileToApiViewModel> FileToApis { get; set; } = new List<FileToApiViewModel>();
 
         //only in database
         public DateTime ModifiedAt { get; set; }

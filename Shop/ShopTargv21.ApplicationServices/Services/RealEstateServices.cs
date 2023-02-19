@@ -14,12 +14,15 @@ namespace ShopTARgv21.ApplicationServices.Services
     public class RealEstateServices : IRealEstateServices
     { 
         private readonly ShopDbContext _context;
+        private readonly IFileServices _fileServices;
         public RealEstateServices
             (
-                ShopDbContext context
+                ShopDbContext context,
+                IFileServices fileServices
             )
         {
             _context = context;
+            _fileServices = fileServices;
         }
         public async Task<RealEstate> Create(RealEstateDto dto)
         {
@@ -33,8 +36,9 @@ namespace ShopTARgv21.ApplicationServices.Services
             realEstate.BuildingType=dto.BuildingType;
             realEstate.County=dto.County;
             realEstate.Size= dto.Size;
-            realEstate.CreatedAt = dto.CreatedAt;
-            realEstate.ModifiedAt= dto.ModifiedAt;
+            realEstate.CreatedAt = DateTime.Now;
+            realEstate.ModifiedAt= DateTime.Now;
+            _fileServices.UploadFileToApi(dto, realEstate);
 
         await _context.RealEstate.AddAsync(realEstate);
         await _context.SaveChangesAsync();

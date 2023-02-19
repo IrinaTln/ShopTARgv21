@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Shop.Models.Car;
 using Shop.Models.RealEstate;
 using ShopTARgv21.ApplicationServices.Services;
@@ -6,6 +7,7 @@ using ShopTARgv21.Core.Domain;
 using ShopTARgv21.Core.Dto;
 using ShopTARgv21.Core.ServiceInterface;
 using ShopTARgv21.Data;
+using System.Runtime.CompilerServices;
 
 namespace Shop.Controllers
 {
@@ -66,7 +68,16 @@ namespace Shop.Controllers
                 County=vm.County,
                 RoomNumber=vm.RoomNumber,
                 CreatedAt=vm.CreatedAt,
-                ModifiedAt=vm.ModifiedAt
+                ModifiedAt=vm.ModifiedAt,
+                Files=vm.Files,
+                FilesToApi = vm.FileToApis
+                    .Select(x=>new FileToApiDto
+                    {
+                        Id = x.PhotoId,
+                        FilePath=x.FilePath,
+                        RealEstateId=x.RealEstateId,
+                    
+                    }).ToArray()
             };
 
             var result = await _realEstateServices.Create(dto);

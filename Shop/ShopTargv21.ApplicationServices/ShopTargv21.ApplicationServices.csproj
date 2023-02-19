@@ -10,6 +10,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
   </ItemGroup>
 
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\ShopTARgv21.Core\ShopTARgv21.Core.csproj" />
     <ProjectReference Include="..\ShopTARgv21.Data\ShopTARgv21.Data.csproj" />

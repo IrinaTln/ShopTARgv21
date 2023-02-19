@@ -18,5 +18,6 @@ namespace ShopTARgv21.Data
             public DbSet<Car> Car { get; set; }
             public DbSet<FileToDatabase> FileToDatabase { get; set; }
             public DbSet<RealEstate> RealEstate { get; set; }
+            public DbSet<FileToApi> FileToApi { get; set; }
         }
 }
