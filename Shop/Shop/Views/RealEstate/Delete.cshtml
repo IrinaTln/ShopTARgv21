@@ -1,4 +1,4 @@
-﻿@model Shop.Models.RealEstate.RealEstateViewModel
+﻿@model Shop.Models.RealEstate.RealEstateDeleteViewModel
 
 <h1>Delete</h1>
 
@@ -53,6 +53,11 @@
             @Html.DisplayFor(model => model.CreatedAt)
         </div>
     </dl>
+
+    @foreach (var images in Model.FileToApis)
+    {
+        <partial name="_Images" model="images" />
+    }
 
     <form asp-action="DeleteConfirmation" asp-route-id="@Model.Id">
         <input type="hidden" asp-for="Id" />

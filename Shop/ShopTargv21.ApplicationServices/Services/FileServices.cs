@@ -100,5 +100,44 @@ namespace ShopTARgv21.ApplicationServices.Services
                 }
             }
         }
+
+        public async Task<FileToApi> RemoveImageFromApi(FileToApiDto dto)
+        {
+            var imageId = await _context.FileToApi
+                .FirstOrDefaultAsync(x => x.Id == dto.Id);
+
+            var filePath = _env.WebRootPath + "\\multipleFileUpload\\" + imageId.FilePath;
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            _context.FileToApi.Remove(imageId);
+            await _context.SaveChangesAsync();
+
+            return imageId;
+        }
+
+        public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dtos)
+        {
+            foreach (var dto in dtos)
+            {
+                var imageId = await _context.FileToApi
+                .FirstOrDefaultAsync(x => x.Id == dto.Id);
+
+                var filePath = _env.WebRootPath + "\\multipleFileUpload\\" + imageId.FilePath;
+
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+
+                _context.FileToApi.Remove(imageId);
+                await _context.SaveChangesAsync();
+            }
+
+            return null;
+        }
     }
 }

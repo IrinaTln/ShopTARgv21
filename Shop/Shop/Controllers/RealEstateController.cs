@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Shop.Models.Car;
 using Shop.Models.RealEstate;
+using Shop.Models.Spaceship;
 using ShopTARgv21.ApplicationServices.Services;
 using ShopTARgv21.Core.Domain;
 using ShopTARgv21.Core.Dto;
 using ShopTARgv21.Core.ServiceInterface;
 using ShopTARgv21.Data;
+using ShopTARgv21.Data.Migrations;
 using System.Runtime.CompilerServices;
 
 namespace Shop.Controllers
@@ -15,15 +18,19 @@ namespace Shop.Controllers
     {
         private readonly ShopDbContext _context;
         private readonly IRealEstateServices _realEstateServices;
+        private readonly IFileServices _fileServices;
 
         public RealEstateController
             (
                ShopDbContext context,
-               IRealEstateServices realEstate
+               IRealEstateServices realEstate,
+               IFileServices fileServices
             )
         {
             _context = context;
             _realEstateServices = realEstate;
+            _fileServices = fileServices;
+
         }
 
         [HttpGet]
@@ -31,7 +38,7 @@ namespace Shop.Controllers
         {
             var result = _context.RealEstate
                 .OrderByDescending(x => x.Id)
-                .Select(x => new RealEstateViewModel
+                .Select(x => new RealEstateListViewModel
                 {
                     Id = x.Id,
                     Address = x.Address,
@@ -100,22 +107,32 @@ namespace Shop.Controllers
                 return NotFound();
             }
 
-            var vm = new RealEstateCreateUpdateViewModel()
-            {
-                Id = realEstate.Id,
-                Address = realEstate.Address,
-                City = realEstate.City,
-                County = realEstate.County,
-                BuildingType = realEstate.BuildingType,
-                Size = realEstate.Size,
-                RoomNumber = realEstate.RoomNumber,
-                Price = realEstate.Price,
-                Contact = realEstate.Contact,
-                ModifiedAt = realEstate.ModifiedAt,
-                CreatedAt = realEstate.CreatedAt,
-            };
+            var files = await _context.FileToApi
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new FileToApiViewModel
+                {
+                    FilePath = y.FilePath,
+                    PhotoId = y.Id
+                })
+                .ToArrayAsync();
+
+            var vm = new RealEstateCreateUpdateViewModel();
+            
+            vm.Id = realEstate.Id;
+            vm.Address = realEstate.Address;
+            vm.City = realEstate.City;
+            vm.County = realEstate.County;
+            vm.BuildingType = realEstate.BuildingType;
+            vm.Size = realEstate.Size;
+            vm.RoomNumber = realEstate.RoomNumber;
+            vm.Price = realEstate.Price;
+            vm.Contact = realEstate.Contact;
+            vm.ModifiedAt = realEstate.ModifiedAt;
+            vm.CreatedAt = realEstate.CreatedAt;
+            vm.FileToApis.AddRange(files);
 
             return View("CreateUpdate", vm);
+            
         }
 
         [HttpPost]
@@ -133,7 +150,15 @@ namespace Shop.Controllers
                 Price = vm.Price,
                 Contact = vm.Contact,
                 ModifiedAt = vm.ModifiedAt,
-                CreatedAt = vm.CreatedAt
+                CreatedAt = vm.CreatedAt,
+                Files = vm.Files,
+                FilesToApi=vm.FileToApis
+                    .Select(x => new FileToApiDto
+                    {
+                        Id = x.PhotoId,
+                        FilePath = x.FilePath,
+                        RealEstateId = x.RealEstateId,
+                    }).ToArray()
                 };
             var result = await _realEstateServices.Update(dto);
 
@@ -155,20 +180,29 @@ namespace Shop.Controllers
                 return NotFound();
             }
 
-            var vm = new RealEstateViewModel()
+            var files = await _context.FileToApi
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new FileToApiViewModel
             {
-                Id = realEstate.Id,
-                Address = realEstate.Address,
-                City = realEstate.City,
-                County = realEstate.County,
-                BuildingType = realEstate.BuildingType,
-                Size = realEstate.Size,
-                RoomNumber = realEstate.RoomNumber,
-                Price = realEstate.Price,
-                Contact = realEstate.Contact,
-                ModifiedAt = realEstate.ModifiedAt,
-                CreatedAt = realEstate.CreatedAt,                
-            };
+                FilePath = y.FilePath,
+                PhotoId = y.Id
+            })
+                .ToArrayAsync();
+
+            var vm = new RealEstateDeleteViewModel();
+
+            vm.Id = realEstate.Id;
+            vm.Address = realEstate.Address;
+            vm.City = realEstate.City;
+            vm.County = realEstate.County;
+            vm.BuildingType = realEstate.BuildingType;
+            vm.Size = realEstate.Size;
+            vm.RoomNumber = realEstate.RoomNumber;
+            vm.Price = realEstate.Price;
+            vm.Contact = realEstate.Contact;
+            vm.ModifiedAt = realEstate.ModifiedAt;
+            vm.CreatedAt = realEstate.CreatedAt;
+            vm.FileToApis.AddRange(files);
 
             return View(vm);
         }
@@ -179,6 +213,24 @@ namespace Shop.Controllers
             var product = await _realEstateServices.Delete(id);
 
             if (product == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(ImageViewModel file)
+        {
+            var dto = new FileToApiDto()
+            {
+                Id = file.ImageId
+            };
+
+            var image = await _fileServices.RemoveImageFromApi(dto);
+
+            if (image == null)
             {
                 return RedirectToAction(nameof(Index));
             }

@@ -71,6 +71,7 @@ namespace ShopTARgv21.ApplicationServices.Services
                 CreatedAt = dto.CreatedAt
             };
 
+            _fileServices.UploadFileToApi(dto, realEstate);
             _context.RealEstate.Update(realEstate);
             await _context.SaveChangesAsync();
 
@@ -79,13 +80,24 @@ namespace ShopTARgv21.ApplicationServices.Services
 
         public async Task<RealEstate> Delete(Guid id)
         {
-            var realEstate = await _context.RealEstate
+            var realEstateId = await _context.RealEstate
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            _context.RealEstate.Remove(realEstate);
+
+            var images = await _context.FileToApi
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new FileToApiDto
+                {
+                    Id = y.Id,
+                    RealEstateId = y.RealEstateId,
+                    FilePath = y.FilePath
+                }).ToArrayAsync();
+
+            await _fileServices.RemoveImagesFromApi(images);
+            _context.RealEstate.Remove(realEstateId);
             await _context.SaveChangesAsync();
 
-            return realEstate;
+            return realEstateId;
         }
     }
 }
