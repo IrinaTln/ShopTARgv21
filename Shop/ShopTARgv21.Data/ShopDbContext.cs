@@ -16,7 +16,8 @@ namespace ShopTARgv21.Data
             public DbSet<Spaceship> Spaceship { get; set; }
 
             public DbSet<Car> Car { get; set; }
+            public DbSet<PictureToDatabase> PictureToDatabase { get; set; }
 
-        }
+    }
     
 }

@@ -104,6 +104,12 @@ else
             </div>
         </div>
 
+        @foreach (var images in Model.Image)
+        {
+            <partial name="_Image" model="images" />
+            <input asp-action="removeImage" asp-controller="car" asp-route-imageId="@images.PictureId" type="submit" class="btn btn-danger" value="Remove Image" />
+        }
+
 
         @if (Model.Id.HasValue)
         {
@@ -118,3 +124,21 @@ else
 
     </form>
 </div> 
+
+    @section Scripts
+{
+    <script>
+        $(document).ready(function() {
+            var fileLabel = $(this).next('.custom-file-label');
+            var file = $(this)[0].files;
+            if(FileSystem.length > 1)
+            {
+                fileLabel.html(files.length + 'files selected');
+            }
+            else if (files.length == 1) {
+                fileLabel.html(files[0].name)
+            }
+        });
+
+    </script>
+}

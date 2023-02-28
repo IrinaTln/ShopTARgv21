@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace ShopTARgv21.Core.Dto
 {
@@ -22,5 +23,7 @@ namespace ShopTARgv21.Core.Dto
         public int CarWeight { get; set; }
         public DateTime BuildOfDate { get; set; }
         public DateTime DateOfRegistration { get; set; }
+        public List<IFormFile> Pictures { get; set; }
+        public IEnumerable<PictureToDatabaseDto> Image { get; set; } = new List<PictureToDatabaseDto>();
     }
 }

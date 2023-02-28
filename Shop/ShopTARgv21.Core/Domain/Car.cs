@@ -22,6 +22,7 @@ namespace ShopTARgv21.Core.Domain
         public int NumberOfCarDoors { get; set; }
         public int NumberOfPassangersWithDriver { get; set; }
         public int CarWeight { get; set; }
+        public IEnumerable<PictureToDatabase> PictureToDatabase { get; set; } = new List<PictureToDatabase>();
         public DateTime BuildOfDate { get; set; }
         public DateTime DateOfRegistration { get; set; }
     }
