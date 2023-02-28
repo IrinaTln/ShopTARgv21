@@ -1,12 +1,66 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model Shop.Models.WeatherForecast.CityViewModel
 }
 <h1>City</h1>
 
 <div class="container">
     <div class="form-group col-md-3">
         <h2>Forecast for the selected city</h2>
-    </div>
+
+        <label asp-for="LocalObservationDateTime"></label>
+        <span class="badge">@Model.LocalObservationDateTime</span>
+        <br />
+
+        <label asp-for="EpochTime"></label>
+        <span class="badge">@Model.EpochTime</span>
+        <br />
+
+        <label asp-for="WeatherText"></label>
+        <span class="badge">@Model.WeatherText</span>
+        <br />
+
+        <label asp-for="WeatherIcon"></label>
+        <span class="badge">@Model.WeatherIcon</span>
+        <br />
+
+        <label asp-for="HasPrecipitation"></label>
+        <span class="badge">@Model.HasPrecipitation</span>
+        <br />
+
+        <label asp-for="IsDayTime"></label>
+        <span class="badge">@Model.IsDayTime</span>
+        <br />
+
+        <label asp-for="MobileLink"></label>
+        <span class="badge">@Model.MobileLink</span>
+        <br />
+
+        <label asp-for="Link"></label>
+        <span class="badge">@Model.Link</span>
+        <br />
+
+        <label asp-for="TempMetricValue"></label>
+        <span class="badge">@Model.TempMetricValue</span>
+        <br />
+
+        <label asp-for="TempMetricUnit"></label>
+        <span class="badge">@Model.TempImperialUnit</span>
+        <br />
+
+        <label asp-for="TempMetricUnitType"></label>
+        <span class="badge">@Model.TempMetricUnitType</span>
+        <br />
+
+        <label asp-for="TempImperialValue"></label>
+        <span class="badge">@Model.TempImperialUnit</span>
+        <br />
+
+        <label asp-for="TempImperialUnit"></label>
+        <span class="badge">@Model.TempImperialUnit</span>
+        <br />
+
+        <label asp-for="TempImperialUnitType"></label>
+        <span class="badge">@Model.TempImperialUnitType</span>
+        <br />
+
+    </div>>
 </div>
