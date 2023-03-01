@@ -9,12 +9,12 @@ namespace ShopTARgv21.ApplicationServices
 {
     public class PictureServices : IPictureServices
     {
-        private readonly ShopDbContext _context;
+        private readonly ShopDbContext _dbcontext;
         private readonly IWebHostEnvironment _env;
 
         public PictureServices(ShopDbContext context, IWebHostEnvironment env)
         {
-            _context = context;
+            _dbcontext = context;
             _env = env;
         }
 
@@ -36,35 +36,35 @@ namespace ShopTARgv21.ApplicationServices
                         photo.CopyTo(target);
                         files.PictureData = target.ToArray();
 
-                        _context.PictureToDatabase.Add(files);
+                        _dbcontext.PictureToDatabase.Add(files);
                     }
                 }
             }
 
         }
 
-        public async Task<PictureToDatabase> RemovePicture(PictureToDatabase dto)
+        public async Task<PictureToDatabase> RemovePicture(PictureToDatabaseDto dto)
         {
-            var imageId = await _context.PictureToDatabase
+            var imageId = await _dbcontext.PictureToDatabase
                 .Where(x => x.Id == dto.Id)
                 .FirstOrDefaultAsync();
 
-            _context.PictureToDatabase.Remove(imageId);
-            await _context.SaveChangesAsync();
+            _dbcontext.PictureToDatabase.Remove(imageId);
+            await _dbcontext.SaveChangesAsync();
 
             return imageId;
         }
 
-        public async Task<List<PictureToDatabase>> RemovePicturesFromDatabase(PictureToDatabase[] dto)
+        public async Task<List<PictureToDatabase>> RemovePicturesFromDatabase(PictureToDatabaseDto[] dto)
         {
             foreach (var dtos in dto)
             {
-                var photoId = await _context.PictureToDatabase
+                var photoId = await _dbcontext.PictureToDatabase
                     .Where(x => x.Id == dtos.Id)
                     .FirstOrDefaultAsync();
 
-                _context.PictureToDatabase.Remove(photoId);
-                await _context.SaveChangesAsync();
+                _dbcontext.PictureToDatabase.Remove(photoId);
+                await _dbcontext.SaveChangesAsync();
 
             }
 

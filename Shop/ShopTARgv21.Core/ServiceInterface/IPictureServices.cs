@@ -12,8 +12,8 @@ namespace ShopTARgv21.Core.ServiceInterface
     {
         void UploadPictureToDatabase(CarDto dto, Car domaine);
 
-        Task<PictureToDatabase> RemovePicture(PictureToDatabase dto);
+        Task<PictureToDatabase> RemovePicture(PictureToDatabaseDto dto);
 
-        Task<List<PictureToDatabase>> RemovePicturesFromDatabase(PictureToDatabase[] dto);
+        Task<List<PictureToDatabase>> RemovePicturesFromDatabase(PictureToDatabaseDto[] dto);
     }
 }

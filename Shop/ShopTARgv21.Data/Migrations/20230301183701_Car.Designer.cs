@@ -12,8 +12,8 @@ using ShopTARgv21.Data;
 namespace ShopTARgv21.Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20221218143422_car")]
-    partial class car
+    [Migration("20230301183701_Car")]
+    partial class Car
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,56 +81,40 @@ namespace ShopTARgv21.Data.Migrations
                     b.ToTable("Car");
                 });
 
-            modelBuilder.Entity("ShopTARgv21.Core.Domain.Spaceship", b =>
+            modelBuilder.Entity("ShopTARgv21.Core.Domain.PictureToDatabase", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("BuildOfDate")
-                        .HasColumnType("datetime2");
+                    b.Property<Guid?>("CarId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Crew")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EnginePower")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LaunchDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("LiftUpToSpaceByTonn")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ModelType")
+                    b.Property<byte[]>("PictureData")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Passengers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlaceOfBuild")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SpaceshipBuilder")
+                    b.Property<string>("PictureTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Spaceship");
+                    b.HasIndex("CarId");
+
+                    b.ToTable("PictureToDatabase");
+                });
+
+            modelBuilder.Entity("ShopTARgv21.Core.Domain.PictureToDatabase", b =>
+                {
+                    b.HasOne("ShopTARgv21.Core.Domain.Car", null)
+                        .WithMany("PictureToDatabase")
+                        .HasForeignKey("CarId");
+                });
+
+            modelBuilder.Entity("ShopTARgv21.Core.Domain.Car", b =>
+                {
+                    b.Navigation("PictureToDatabase");
                 });
 #pragma warning restore 612, 618
         }

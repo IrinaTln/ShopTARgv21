@@ -3,7 +3,6 @@ using Shop.Models.Car;
 using ShopTARgv21.Data;
 using ShopTARgv21.Core.Dto;
 using ShopTARgv21.Core.ServiceInterface;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.EntityFrameworkCore;
 
 namespace Shop.Controllers
@@ -125,7 +124,7 @@ namespace Shop.Controllers
             vm.CarWeight = car.CarWeight;
             vm.BuildOfDate = car.BuildOfDate;
             vm.DateOfRegistration = car.DateOfRegistration;
-            vm.Pictures.AddRange(photos);
+            vm.Image.AddRange(photos);
 
 
             return View("CreateUpdate", vm);
@@ -210,7 +209,7 @@ namespace Shop.Controllers
             vm.CarWeight = car.CarWeight;
             vm.BuildOfDate = car.BuildOfDate;
             vm.DateOfRegistration = car.DateOfRegistration;
-            vm.AddRange(photos);
+            vm.Image.AddRange(photos);
         
 
             return View(vm);
@@ -230,7 +229,7 @@ namespace Shop.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RemoveImage(PictureViewModel file)
+        public async Task<IActionResult> RemovePicture(PictureViewModel file)
         {
             var dto = new PictureToDatabaseDto()
             {

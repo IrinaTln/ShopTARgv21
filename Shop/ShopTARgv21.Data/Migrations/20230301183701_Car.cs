@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ShopTARgv21.Data.Migrations
 {
-    public partial class car : Migration
+    public partial class Car : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,10 +32,37 @@ namespace ShopTARgv21.Data.Migrations
                 {
                     table.PrimaryKey("PK_Car", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "PictureToDatabase",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PictureTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PictureData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    CarId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PictureToDatabase", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PictureToDatabase_Car_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Car",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PictureToDatabase_CarId",
+                table: "PictureToDatabase",
+                column: "CarId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "PictureToDatabase");
+
             migrationBuilder.DropTable(
                 name: "Car");
         }
