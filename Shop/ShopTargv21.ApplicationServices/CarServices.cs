@@ -9,16 +9,20 @@ namespace ShopTARgv21.ApplicationServices.Services
     public class CarServices : ICarServices
     {
         private readonly ShopDbContext _dbcontext;
+        private readonly IPictureServices _pictures;
         public CarServices
             (
-                ShopDbContext dbcontext
+                ShopDbContext dbcontext,
+                IPictureServices pictures
             )
         {
             _dbcontext = dbcontext;
+            _pictures = pictures;
         }
         public async Task<Car> Create(CarDto dto)
         {
             Car car = new Car();
+            PictureToDatabase file = new PictureToDatabase();
 
             car.Id = dto.Id;
             car.OwnerName = dto.OwnerName;
@@ -34,6 +38,11 @@ namespace ShopTARgv21.ApplicationServices.Services
             car.CarWeight = dto.CarWeight;
             car.BuildOfDate = dto.BuildOfDate;
             car.DateOfRegistration = dto.DateOfRegistration;
+
+            if (dto.Pictures != null)
+            {
+                _pictures.UploadPictureToDatabase(dto, car);
+            }
 
             await _dbcontext.Car.AddAsync(car);
             await _dbcontext.SaveChangesAsync();
@@ -52,6 +61,7 @@ namespace ShopTARgv21.ApplicationServices.Services
 
         public async Task<Car> Update(CarDto dto)
         {
+            PictureToDatabase picture = new PictureToDatabase();
 
             var car = new Car()
             {
@@ -71,16 +81,33 @@ namespace ShopTARgv21.ApplicationServices.Services
                 DateOfRegistration = dto.DateOfRegistration
             };
 
+            if (dto.Pictures != null)
+            {
+                _pictures.UploadPictureToDatabase(dto, car);
+            }
+
             _dbcontext.Car.Update(car);
             await _dbcontext.SaveChangesAsync();
-
             return car;
         }
 
         public async Task<Car> Delete(Guid id)
         {
             var car = await _dbcontext.Car
+                .Include(x => x.PictureToDatabase)
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            var photos = await _dbcontext.PictureToDatabase
+               .Where(x => x.CarId == id)
+               .Select(y => new PictureToDatabaseDto
+               {
+                   Id = y.Id,
+                   PictureTitle = y.PictureTitle,
+                   CarId = y.CarId
+               })
+                   .ToArrayAsync();
+
+            await _pictures.RemovePicturesFromDatabase(photos);
 
             _dbcontext.Car.Remove(car);
             await _dbcontext.SaveChangesAsync();

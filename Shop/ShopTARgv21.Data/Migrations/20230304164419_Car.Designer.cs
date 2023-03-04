@@ -12,7 +12,7 @@ using ShopTARgv21.Data;
 namespace ShopTARgv21.Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20230301183701_Car")]
+    [Migration("20230304164419_Car")]
     partial class Car
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

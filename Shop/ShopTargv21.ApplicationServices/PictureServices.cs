@@ -12,9 +12,9 @@ namespace ShopTARgv21.ApplicationServices
         private readonly ShopDbContext _dbcontext;
         private readonly IWebHostEnvironment _env;
 
-        public PictureServices(ShopDbContext context, IWebHostEnvironment env)
+        public PictureServices(ShopDbContext dbcontext, IWebHostEnvironment env)
         {
-            _dbcontext = context;
+            _dbcontext = dbcontext;
             _env = env;
         }
 
