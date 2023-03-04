@@ -2,8 +2,9 @@
 using ShopTARgv21.Core.Domain;
 using ShopTARgv21.Core.Dto;
 using ShopTARgv21.Data;
-using Microsoft.AspNetCore.Hosting;
 using ShopTARgv21.Core.ServiceInterface;
+using Microsoft.AspNetCore.Hosting;
+
 
 namespace ShopTARgv21.ApplicationServices
 {
