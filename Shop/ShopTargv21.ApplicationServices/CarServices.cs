@@ -9,22 +9,22 @@ namespace ShopTARgv21.ApplicationServices.Services
     public class CarServices : ICarServices
     {
         private readonly ShopDbContext _dbcontext;
-        private readonly IPictureServices _pictures;
+        private readonly IFileServices _files;
         public CarServices
             (
                 ShopDbContext dbcontext,
-                IPictureServices pictures
+                IFileServices files
             )
         {
             _dbcontext = dbcontext;
-            _pictures = pictures;
+            _files = files;
         }
         public async Task<Car> Create(CarDto dto)
         {
             Car car = new Car();
-            PictureToDatabase file = new PictureToDatabase();
+            FileToDatabase file = new FileToDatabase();
 
-            car.Id = dto.Id;
+            car.Id = Guid.NewGuid();
             car.OwnerName = dto.OwnerName;
             car.NumberOfRegistration = dto.NumberOfRegistration;
             car.VINCode = dto.VINCode;
@@ -39,9 +39,9 @@ namespace ShopTARgv21.ApplicationServices.Services
             car.BuildOfDate = dto.BuildOfDate;
             car.DateOfRegistration = dto.DateOfRegistration;
 
-            if (dto.Pictures != null)
+            if (dto.Files != null)
             {
-                _pictures.UploadPictureToDatabase(dto, car);
+                _files.UploadPictureToDatabase(dto, car);
             }
 
             await _dbcontext.Car.AddAsync(car);
@@ -61,7 +61,7 @@ namespace ShopTARgv21.ApplicationServices.Services
 
         public async Task<Car> Update(CarDto dto)
         {
-            PictureToDatabase picture = new PictureToDatabase();
+            FileToDatabase picture = new FileToDatabase();
 
             var car = new Car()
             {
@@ -81,9 +81,9 @@ namespace ShopTARgv21.ApplicationServices.Services
                 DateOfRegistration = dto.DateOfRegistration
             };
 
-            if (dto.Pictures != null)
+            if (dto.Files != null)
             {
-                _pictures.UploadPictureToDatabase(dto, car);
+                _files.UploadPictureToDatabase(dto, car);
             }
 
             _dbcontext.Car.Update(car);
@@ -93,26 +93,52 @@ namespace ShopTARgv21.ApplicationServices.Services
 
         public async Task<Car> Delete(Guid id)
         {
-            var car = await _dbcontext.Car
-                .Include(x => x.PictureToDatabase)
+            var carId = await _dbcontext.Car
+                .Include(x => x.FileToDatabase)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            var photos = await _dbcontext.PictureToDatabase
+            var photos = await _dbcontext.FileToDatabase
                .Where(x => x.CarId == id)
-               .Select(y => new PictureToDatabaseDto
+               .Select(y => new FileToDatabaseDto
                {
                    Id = y.Id,
-                   PictureTitle = y.PictureTitle,
+                   ImageTitle = y.ImageTitle,
                    CarId = y.CarId
                })
                    .ToArrayAsync();
 
-            await _pictures.RemovePicturesFromDatabase(photos);
+            await _files.RemovePicturesFromDatabase(photos);
 
-            _dbcontext.Car.Remove(car);
+            _dbcontext.Car.Remove(carId);
             await _dbcontext.SaveChangesAsync();
 
-            return car;
+            return carId;
+        }
+
+        public byte[] UploadFile(CarDto dto, Car domain)
+        {
+            if (dto.Files != null && dto.Files.Count > 0)
+            {
+                foreach (var photo in dto.Files)
+                {
+                    using (var target = new MemoryStream())
+                    {
+                        FileToDatabase files = new FileToDatabase
+                        {
+                            Id = Guid.NewGuid(),
+                            ImageTitle = photo.FileName,
+                            CarId = domain.Id,
+                        };
+
+                        photo.CopyTo(target);
+                        files.ImageData = target.ToArray();
+
+                        _dbcontext.FileToDatabase.Add(files);
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

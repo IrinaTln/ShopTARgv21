@@ -8,63 +8,63 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace ShopTARgv21.ApplicationServices
 {
-    public class PictureServices : IPictureServices
+    public class FileServices : IFileServices
     {
         private readonly ShopDbContext _dbcontext;
         private readonly IWebHostEnvironment _env;
 
-        public PictureServices(ShopDbContext dbcontext, IWebHostEnvironment env)
+        public FileServices(ShopDbContext dbcontext, IWebHostEnvironment env)
         {
             _dbcontext = dbcontext;
             _env = env;
         }
 
-        public void UploadPictureToDatabase(CarDto dto, Car domaine)
+        public void UploadPictureToDatabase(CarDto dto, Car domain)
         {
-            if (dto.Pictures != null && dto.Pictures.Count > 0)
+            if (dto.Files != null && dto.Files.Count > 0)
             {
-                foreach (var photo in dto.Pictures)
+                foreach (var photo in dto.Files)
                 {
                     using (var target = new MemoryStream())
                     {
-                        PictureToDatabase files = new PictureToDatabase
+                        FileToDatabase files = new FileToDatabase
                         {
                             Id = Guid.NewGuid(),
-                            PictureTitle = photo.FileName,
-                            CarId = domaine.Id,
+                            ImageTitle = photo.FileName,
+                            CarId = domain.Id,
                         };
 
                         photo.CopyTo(target);
-                        files.PictureData = target.ToArray();
+                        files.ImageData = target.ToArray();
 
-                        _dbcontext.PictureToDatabase.Add(files);
+                        _dbcontext.FileToDatabase.Add(files);
                     }
                 }
             }
 
         }
 
-        public async Task<PictureToDatabase> RemovePicture(PictureToDatabaseDto dto)
+        public async Task<FileToDatabase> RemovePicture(FileToDatabaseDto dto)
         {
-            var imageId = await _dbcontext.PictureToDatabase
+            var imageId = await _dbcontext.FileToDatabase
                 .Where(x => x.Id == dto.Id)
                 .FirstOrDefaultAsync();
 
-            _dbcontext.PictureToDatabase.Remove(imageId);
+            _dbcontext.FileToDatabase.Remove(imageId);
             await _dbcontext.SaveChangesAsync();
 
             return imageId;
         }
 
-        public async Task<List<PictureToDatabase>> RemovePicturesFromDatabase(PictureToDatabaseDto[] dto)
+        public async Task<List<FileToDatabase>> RemovePicturesFromDatabase(FileToDatabaseDto[] dto)
         {
             foreach (var dtos in dto)
             {
-                var photoId = await _dbcontext.PictureToDatabase
+                var photoId = await _dbcontext.FileToDatabase
                     .Where(x => x.Id == dtos.Id)
                     .FirstOrDefaultAsync();
 
-                _dbcontext.PictureToDatabase.Remove(photoId);
+                _dbcontext.FileToDatabase.Remove(photoId);
                 await _dbcontext.SaveChangesAsync();
 
             }

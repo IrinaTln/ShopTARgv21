@@ -16,7 +16,7 @@
         public int CarWeight { get; set; }
         public DateTime BuildOfDate { get; set; }
         public DateTime DateOfRegistration { get; set; }
-        public List<IFormFile> Pictures { get; set; }
-        public List<PictureViewModel> Image { get; set; } = new List<PictureViewModel>();
+        public List<IFormFile> Files { get; set; }
+        public List<ImageViewModel> Image { get; set; } = new List<ImageViewModel>();
     }
 }

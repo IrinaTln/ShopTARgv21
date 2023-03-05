@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ShopTARgv21.Data.Migrations
 {
-    public partial class Car : Migration
+    public partial class car : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,34 +34,34 @@ namespace ShopTARgv21.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PictureToDatabase",
+                name: "FileToDatabase",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PictureTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PictureData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    ImageTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     CarId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PictureToDatabase", x => x.Id);
+                    table.PrimaryKey("PK_FileToDatabase", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PictureToDatabase_Car_CarId",
+                        name: "FK_FileToDatabase_Car_CarId",
                         column: x => x.CarId,
                         principalTable: "Car",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PictureToDatabase_CarId",
-                table: "PictureToDatabase",
+                name: "IX_FileToDatabase_CarId",
+                table: "FileToDatabase",
                 column: "CarId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PictureToDatabase");
+                name: "FileToDatabase");
 
             migrationBuilder.DropTable(
                 name: "Car");

@@ -11,12 +11,12 @@ namespace Shop.Controllers
     {
         private readonly ShopDbContext _dbcontext;
         private readonly ICarServices _carServices;
-        private readonly IPictureServices _pictureServices;
-        public CarController(ShopDbContext dbcontext, ICarServices carServices, IPictureServices pictureServices)
+        private readonly IFileServices _fileServices;
+        public CarController(ShopDbContext dbcontext, ICarServices carServices, IFileServices fileServices)
         {
             _dbcontext = dbcontext;
             _carServices = carServices;
-            _pictureServices = pictureServices;
+            _fileServices = fileServices;
         }
 
         [HttpGet]
@@ -65,13 +65,13 @@ namespace Shop.Controllers
                 CarWeight = vm.CarWeight,
                 BuildOfDate = vm.BuildOfDate,
                 DateOfRegistration = vm.DateOfRegistration,
-                Pictures = vm.Pictures,
-                Image = vm.Image.Select(x => new PictureToDatabaseDto
+                Files = vm.Files,
+                Image = vm.Image.Select(x => new FileToDatabaseDto
 
                 {
-                    Id = x.PictureId,
-                    PictureData = x.PictureData,
-                    PictureTitle = x.PictureTitle,
+                    Id = x.ImageId,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
                     CarId = x.CarId
                 }).ToArray()
             };
@@ -83,7 +83,7 @@ namespace Shop.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), vm);
         }
 
         [HttpGet]
@@ -97,14 +97,14 @@ namespace Shop.Controllers
                 return NotFound();
             }
 
-            var photos = await _dbcontext.PictureToDatabase
+            var photos = await _dbcontext.FileToDatabase
                 .Where(x => x.CarId == id)
-                .Select(y => new PictureViewModel
+                .Select(y => new ImageViewModel
                 {
-                    PictureData = y.PictureData,
-                    PictureId = y.Id,
-                    Picture = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.PictureData)),
-                    PictureTitle = y.PictureTitle,
+                    ImageData = y.ImageData,
+                    ImageId = y.Id,
+                    Image = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData)),
+                    ImageTitle = y.ImageTitle,
                     CarId = y.Id
                 }).ToArrayAsync();
 
@@ -150,13 +150,13 @@ namespace Shop.Controllers
                 CarWeight = vm.CarWeight,
                 BuildOfDate = vm.BuildOfDate,
                 DateOfRegistration = vm.DateOfRegistration,
-                Pictures = vm.Pictures,
-                Image = vm.Image.Select(x => new PictureToDatabaseDto
+                Files = vm.Files,
+                Image = vm.Image.Select(x => new FileToDatabaseDto
 
                 {
-                    Id = x.PictureId,
-                    PictureData = x.PictureData,
-                    PictureTitle = x.PictureTitle,
+                    Id = x.ImageId,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
                     CarId = x.CarId
                 }).ToArray()
 
@@ -181,14 +181,14 @@ namespace Shop.Controllers
                 return NotFound();
             }
 
-            var photos = await _dbcontext.PictureToDatabase
+            var photos = await _dbcontext.FileToDatabase
                 .Where(x => x.CarId == id)
-                .Select(y => new PictureViewModel
+                .Select(y => new ImageViewModel
                 {
-                    PictureData = y.PictureData,
-                    PictureId = y.Id,
-                    Picture = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.PictureData)),
-                    PictureTitle = y.PictureTitle,
+                    ImageData = y.ImageData,
+                    ImageId = y.Id,
+                    Image = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData)),
+                    ImageTitle = y.ImageTitle,
                     CarId = y.Id
                 })
                 .ToArrayAsync();
@@ -212,7 +212,7 @@ namespace Shop.Controllers
             vm.Image.AddRange(photos);
         
 
-            return View(vm);
+            return View("Delete", vm);
         }
 
         [HttpPost]
@@ -229,18 +229,18 @@ namespace Shop.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RemovePicture(PictureViewModel file)
+        public async Task<IActionResult> RemovePicture(ImageViewModel file)
         {
-            var dto = new PictureToDatabaseDto()
+            var dto = new FileToDatabaseDto()
             {
-                Id = file.PictureId
+                Id = file.ImageId
             };
 
-            var image = await _pictureServices.RemovePicture(dto);
+            var image = await _fileServices.RemovePicture(dto);
 
             if (image == null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("CreateUpdate");
             }
 
             return RedirectToAction(nameof(Index));

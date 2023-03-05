@@ -79,7 +79,7 @@ namespace ShopTARgv21.Data.Migrations
                     b.ToTable("Car");
                 });
 
-            modelBuilder.Entity("ShopTARgv21.Core.Domain.PictureToDatabase", b =>
+            modelBuilder.Entity("ShopTARgv21.Core.Domain.FileToDatabase", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,11 +88,11 @@ namespace ShopTARgv21.Data.Migrations
                     b.Property<Guid?>("CarId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("PictureData")
+                    b.Property<byte[]>("ImageData")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("PictureTitle")
+                    b.Property<string>("ImageTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -100,19 +100,19 @@ namespace ShopTARgv21.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("PictureToDatabase");
+                    b.ToTable("FileToDatabase");
                 });
 
-            modelBuilder.Entity("ShopTARgv21.Core.Domain.PictureToDatabase", b =>
+            modelBuilder.Entity("ShopTARgv21.Core.Domain.FileToDatabase", b =>
                 {
                     b.HasOne("ShopTARgv21.Core.Domain.Car", null)
-                        .WithMany("PictureToDatabase")
+                        .WithMany("FileToDatabase")
                         .HasForeignKey("CarId");
                 });
 
             modelBuilder.Entity("ShopTARgv21.Core.Domain.Car", b =>
                 {
-                    b.Navigation("PictureToDatabase");
+                    b.Navigation("FileToDatabase");
                 });
 #pragma warning restore 612, 618
         }

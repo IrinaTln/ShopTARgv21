@@ -105,19 +105,19 @@ else
         </div>
 
         <div class="form-group row">
-            <label asp-for="Pictures" class="col-sm-2 col-form-label"></label>
+            <label asp-for="Files" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-5">
                 <div class="custom-file">
-                    <input class="form-control custom-file-input" asp-for="Pictures" multiple type="file" />
+                    <input class="form-control custom-file-input" asp-for="Files" multiple type="file" />
                     <label class="custom-file-label"></label>
                 </div>
             </div>
         </div>
 
-        @foreach (var images in Model.Image)
+        @foreach (var image in Model.Image)
         {
-            <partial name="Picture" model="images" />
-            <input asp-action="removeImage" asp-controller="car" asp-route-imageId="@images.PictureId" type="submit" class="btn btn-danger" value="Remove Image" />
+            <partial name="_Image" model="image" />
+            <input asp-action="removePicture" asp-controller="car" asp-route-imageId="@image.ImageId" type="submit" class="btn btn-danger" value="Remove Image" />
         }
 
 
@@ -139,14 +139,16 @@ else
     {
     <script>
         $(document).ready(function () {
-            var fileLabel = $(this).next('.custom-file-label');
-            var file = $(this)[0].files;
-            if (FileSystem.length > 1) {
-                fileLabel.html(files.length + 'files selected');
-            }
-            else if (files.length == 1) {
-                fileLabel.html(files[0].name)
-            }
+            $('.custom-file-input').on("change", function () {
+                var fileLabel = $(this).next('.custom-file-label');
+                var files = $(this)[0].files;
+                if (files.length > 1) {
+                    fileLabel.html(files.length + ' files selected');
+                }
+                else if (files.length == 1) {
+                    fileLabel.html(files[0].name);
+                }
+            });
         });
     </script>
 }

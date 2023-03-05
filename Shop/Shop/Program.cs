@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ShopDbContext>(options =>
 
 builder.Services.AddScoped<ICarServices, CarServices>();
 
-builder.Services.AddScoped<IPictureServices, PictureServices>();
+builder.Services.AddScoped<IFileServices, FileServices>();
 
 var app = builder.Build();
 

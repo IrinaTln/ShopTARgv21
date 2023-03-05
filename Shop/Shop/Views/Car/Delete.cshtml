@@ -68,7 +68,7 @@
 
      @foreach (var images in Model.Image)
         {
-            <partial name="Picture" model="images" />
+            <partial name="_Image" model="images" />
         }
 
     <form asp-action="DeleteConfirmation" asp-route-id="@Model.Id">

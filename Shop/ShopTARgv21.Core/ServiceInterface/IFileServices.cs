@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace ShopTARgv21.Core.ServiceInterface
 {
-    public interface IPictureServices : IApplicationServices
+    public interface IFileServices : IApplicationServices
     {
         void UploadPictureToDatabase(CarDto dto, Car domaine);
 
-        Task<PictureToDatabase> RemovePicture(PictureToDatabaseDto dto);
-
-        Task<List<PictureToDatabase>> RemovePicturesFromDatabase(PictureToDatabaseDto[] dto);
+        Task<FileToDatabase> RemovePicture(FileToDatabaseDto dto);
+        Task<List<FileToDatabase>> RemovePicturesFromDatabase(FileToDatabaseDto[] dto);
     }
 }

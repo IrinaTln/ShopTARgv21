@@ -23,7 +23,7 @@ namespace ShopTARgv21.Core.Dto
         public int CarWeight { get; set; }
         public DateTime BuildOfDate { get; set; }
         public DateTime DateOfRegistration { get; set; }
-        public List<IFormFile> Pictures { get; set; }
-        public IEnumerable<PictureToDatabaseDto> Image { get; set; } = new List<PictureToDatabaseDto>();
+        public List<IFormFile> Files { get; set; }
+        public IEnumerable<FileToDatabaseDto> Image { get; set; } = new List<FileToDatabaseDto>();
     }
 }
