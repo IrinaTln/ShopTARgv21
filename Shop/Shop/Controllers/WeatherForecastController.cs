@@ -60,7 +60,7 @@ namespace Shop.Controllers
                 vm.TempImperialUnit = dto.TempImperialUnit;
                 vm.TempImperialUnitType = dto.TempImperialUnitType;
 
-                return View(dto);
+                return View(vm);
 
             }
         }

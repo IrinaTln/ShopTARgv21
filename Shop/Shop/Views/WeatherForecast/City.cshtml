@@ -1,66 +1,82 @@
 ﻿@model Shop.Models.WeatherForecast.CityViewModel
-}
+
 <h1>City</h1>
 
-<div class="container">
-    <div class="form-group col-md-3">
+<div>
+    <div>
         <h2>Forecast for the selected city</h2>
+        <dl class="row">
+            <div class="form-group row">
+                <label asp-for="LocalObservationDateTime" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.LocalObservationDateTime)
+            </div>
 
-        <label asp-for="LocalObservationDateTime"></label>
-        <span class="badge">@Model.LocalObservationDateTime</span>
-        <br />
 
-        <label asp-for="EpochTime"></label>
-        <span class="badge">@Model.EpochTime</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="EpochTime" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.EpochTime)
+            </div>
 
-        <label asp-for="WeatherText"></label>
-        <span class="badge">@Model.WeatherText</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="WeatherText" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.WeatherText)
+            </div>
 
-        <label asp-for="WeatherIcon"></label>
-        <span class="badge">@Model.WeatherIcon</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="WeatherIcon" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.WeatherIcon)
+            </div>
 
-        <label asp-for="HasPrecipitation"></label>
-        <span class="badge">@Model.HasPrecipitation</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="HasPrecipitation" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.HasPrecipitation)
+            </div>
 
-        <label asp-for="IsDayTime"></label>
-        <span class="badge">@Model.IsDayTime</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="IsDayTime" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.IsDayTime)
+            </div>
 
-        <label asp-for="MobileLink"></label>
-        <span class="badge">@Model.MobileLink</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="MobileLink" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.MobileLink)
+            </div>
 
-        <label asp-for="Link"></label>
-        <span class="badge">@Model.Link</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="Link" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Link)
+            </div>
 
-        <label asp-for="TempMetricValue"></label>
-        <span class="badge">@Model.TempMetricValue</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="TempMetricValue" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.TempMetricValue)
+            </div>
 
-        <label asp-for="TempMetricUnit"></label>
-        <span class="badge">@Model.TempImperialUnit</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="TempMetricUnit" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.TempMetricUnit)
+            </div>
 
-        <label asp-for="TempMetricUnitType"></label>
-        <span class="badge">@Model.TempMetricUnitType</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="TempMetricUnitType" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.TempMetricUnitType)
+            </div>
 
-        <label asp-for="TempImperialValue"></label>
-        <span class="badge">@Model.TempImperialUnit</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="TempImperialValue" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.TempImperialValue)
+            </div>
 
-        <label asp-for="TempImperialUnit"></label>
-        <span class="badge">@Model.TempImperialUnit</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="TempImperialUnit" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.TempImperialUnit)
+            </div>
 
-        <label asp-for="TempImperialUnitType"></label>
-        <span class="badge">@Model.TempImperialUnitType</span>
-        <br />
+            <div class="form-group row">
+                <label asp-for="TempImperialUnitType" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.TempImperialUnitType)
+            </div>
+        </dl>
 
-    </div>>
+    </div>
 </div>

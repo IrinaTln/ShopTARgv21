@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARgv21.Core", "ShopTAR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARgv21.Data", "ShopTARgv21.Data\ShopTARgv21.Data.csproj", "{6E2BAFA1-A1BD-4986-9AC5-984B8DDFA7CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopTARgv21.ApplicationServices", "ShopTARgv21.ApplicationServices\ShopTARgv21.ApplicationServices.csproj", "{DE1135A0-85E7-4B8F-AE66-06C33E98DE54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARgv21.ApplicationServices", "ShopTARgv21.ApplicationServices\ShopTARgv21.ApplicationServices.csproj", "{DE1135A0-85E7-4B8F-AE66-06C33E98DE54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopTARgv21.SpaceshipTest", "ShopTARgv21.SpaceshipTest\ShopTARgv21.SpaceshipTest.csproj", "{9A2C4A46-6F45-4C9D-8705-92179581F477}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DE1135A0-85E7-4B8F-AE66-06C33E98DE54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE1135A0-85E7-4B8F-AE66-06C33E98DE54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE1135A0-85E7-4B8F-AE66-06C33E98DE54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A2C4A46-6F45-4C9D-8705-92179581F477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A2C4A46-6F45-4C9D-8705-92179581F477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A2C4A46-6F45-4C9D-8705-92179581F477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A2C4A46-6F45-4C9D-8705-92179581F477}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ShopTARgv21.Core.Domain;
 using ShopTARgv21.Core.Dto;
 using ShopTARgv21.Core.ServiceInterface;
 using ShopTARgv21.Data;
 
-
 namespace ShopTARgv21.ApplicationServices.Services
 {
     public class SpaceShipServices : ISpaceShipServices
-
     {
         private readonly ShopDbContext _context;
         private readonly IFileServices _files;
@@ -48,7 +41,8 @@ namespace ShopTARgv21.ApplicationServices.Services
 
             if (dto.Files != null)
             {
-                _files.UploadFileToDatabase(dto, spaceship);
+               _files.UploadFileToDatabase(dto, spaceship);
+                //file.ImageData = _files.UploadFileToDatabase(dto, spaceship);
             }
 
             await _context.Spaceship.AddAsync(spaceship);
@@ -101,7 +95,7 @@ namespace ShopTARgv21.ApplicationServices.Services
         public async Task<Spaceship> Delete(Guid id)
         {
             var spaceshipId= await _context.Spaceship
-              .Include(x => x.FileToDatabases)
+              //.Include(x => x.FileToDatabases)
               .FirstOrDefaultAsync(x => x.Id == id);
 
             var photos = await _context.FileToDatabase
