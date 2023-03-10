@@ -21,6 +21,8 @@ builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
 
 builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
 
+builder.Services.AddScoped<IOpenWeatherServices, OpenWeatherServices>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

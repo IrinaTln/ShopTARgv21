@@ -1,12 +1,8 @@
 ﻿using Nancy.Json;
 using ShopTARgv21.Core.Dto.Weather;
 using ShopTARgv21.Core.ServiceInterface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ShopTARgv21.ApplicationServices.Services
 {
