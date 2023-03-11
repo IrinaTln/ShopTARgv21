@@ -12,10 +12,9 @@ namespace ShopTARgv21.ApplicationServices.Services
         {
 
             string apiKey = "bc3efa1190d615a4022bc8556848152b";
-            //string cityName = new OpenWeatherSearchCityViewModel();
             //var url1 = $"https://api.openweathermap.org/data/2.5/weather?lat={{lat}}&lon={{lon}}&appid={{apiKey}}";
             var url = $"https://api.openweathermap.org/data/2.5/weather?lat=59.26&lon=24.45&appid=bc3efa1190d615a4022bc8556848152b&units=metric";
-            //var url2 = $"https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={apiKey}&units=metric";
+            //var url = $"https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={apiKey}&units=metric";
 
             using (WebClient client = new WebClient())
             {
