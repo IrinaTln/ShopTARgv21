@@ -1,0 +1,37 @@
+﻿@model Shop.Models.OpenWeather.OpenWeatherCityViewModel
+
+<h1>Open Weather</h1>
+
+<div class="container">
+    <div class="form-group col-md-3">
+        <h2>Tallinn</h2>
+
+        <label asp-for="temp">Temperature: </label>
+        <span class="badge">@Model.temp °C</span>
+        <br />
+
+        <label asp-for="feels_like">Temperature feels like: </label>
+        <span class="badge">@Model.feels_like °C</span>
+        <br />
+
+        <label asp-for="pressure">Pressure: </label>
+        <span class="badge">@Model.pressure Hpa</span>
+        <br />
+
+        <label asp-for="humidity">Humidity: </label>
+        <span class="badge">@Model.humidity %</span>
+        <br />
+
+        <label asp-for="main">Weather condition: </label>
+        <span class="badge">@Model.main</span>
+        <br />
+
+        <label asp-for="speed">Wind speed: </label>
+        <span class="badge">@Model.speed Km/h</span>
+        <br />
+
+        <a asp-action="Back" class="btn btn-primary">Return</a>
+
+    </div>
+</div>
+
