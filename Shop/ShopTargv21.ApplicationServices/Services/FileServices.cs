@@ -3,16 +3,16 @@ using ShopTARgv21.Core.Domain;
 using ShopTARgv21.Core.Dto;
 using ShopTARgv21.Core.ServiceInterface;
 using ShopTARgv21.Data;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace ShopTARgv21.ApplicationServices.Services
 {
     public class FileServices : IFileServices
     {
         private readonly ShopDbContext _context;
-        private readonly IWebHostEnvironment _env;
+        private readonly IHostEnvironment _env;
 
-        public FileServices(ShopDbContext context, IWebHostEnvironment env)
+        public FileServices(ShopDbContext context, IHostEnvironment env)
         {
             _context = context;
             _env = env;
@@ -75,13 +75,13 @@ namespace ShopTARgv21.ApplicationServices.Services
         {
             if (dto.Files != null && dto.Files.Count > 0)
             {
-                if (!Directory.Exists(_env.WebRootPath + "\\multipleFileUpload\\"))
+                if (!Directory.Exists(_env.ContentRootPath + "\\multipleFileUpload\\"))
                 {
-                    Directory.CreateDirectory(_env.WebRootPath + "\\multipleFileUpload\\");
+                    Directory.CreateDirectory(_env.ContentRootPath + "\\multipleFileUpload\\");
                 }
                 foreach (var file in dto.Files)
                 {
-                    string uploadsFolder = Path.Combine(_env.WebRootPath, "multipleFileUpload");
+                    string uploadsFolder = Path.Combine(_env.ContentRootPath, "multipleFileUpload");
                     var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
@@ -106,7 +106,7 @@ namespace ShopTARgv21.ApplicationServices.Services
             var imageId = await _context.FileToApi
                 .FirstOrDefaultAsync(x => x.Id == dto.Id);
 
-            var filePath = _env.WebRootPath + "\\multipleFileUpload\\" + imageId.FilePath;
+            var filePath = _env.ContentRootPath + "\\multipleFileUpload\\" + imageId.FilePath;
 
             if (File.Exists(filePath))
             {
@@ -126,7 +126,7 @@ namespace ShopTARgv21.ApplicationServices.Services
                 var imageId = await _context.FileToApi
                 .FirstOrDefaultAsync(x => x.Id == dto.Id);
 
-                var filePath = _env.WebRootPath + "\\multipleFileUpload\\" + imageId.FilePath;
+                var filePath = _env.ContentRootPath + "\\multipleFileUpload\\" + imageId.FilePath;
 
                 if (File.Exists(filePath))
                 {

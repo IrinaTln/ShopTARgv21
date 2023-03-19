@@ -1,4 +1,7 @@
-﻿namespace ShopTARgv21.SpaceshipTest
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
+namespace ShopTARgv21.SpaceshipTest
 {
     public abstract class TestBase : IDisposable
     {
@@ -11,9 +14,16 @@
             serviceProvider = services.BuildServiceProvider();
         }
 
+        public void Dispose()
+        {
+
+        }
+
         public virtual void SetupServices(IServiceCollection services)
         {
             services.AddScoped<ISpaceShipServices, SpaceShipServices>();
+            services.AddScoped<IFileServices, FileServices>();
+            services.AddScoped<IHostEnvironment, MockWebHostingEnv>();
 
             services.AddDbContext<ShopDbContext>(x =>
             {
@@ -44,11 +54,6 @@
             {
                 services.AddTransient(macro);
             }
-        }
-
-        public void Dispose()
-        {
-            
         }
     }
 }
