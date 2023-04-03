@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopTARgv21.ApplicationServices.Services;
 using ShopTARgv21.Core.ServiceInterface;
 using ShopTARgv21.Data;
+using SimpleEmailApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,9 @@ builder.Services.AddScoped<IFileServices, FileServices>();
 builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
 
 builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
+
+builder.Services.AddScoped<IEmailServices, EmailServices>();
+
 
 var app = builder.Build();
 
